@@ -11,7 +11,7 @@ const Register: React.FC = () => {
   const onFinish = async (values: any) => {
     setLoading(true);
     try {
-      const response = await axios.post('https://video-uploader-api.vercel.app/api/accounts/register', {
+      const response = await axios.post('http://localhost:8080/api/accounts/register', {
         firstname: values.firstname,
         lastname: values.lastname,
         email: values.email,
