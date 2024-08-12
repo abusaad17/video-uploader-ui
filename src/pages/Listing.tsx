@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 interface Video {
-  videoData: string;
+  videoUrl: string;
   thumbnail: string;
   title: string;
   description: string;
@@ -31,12 +31,12 @@ const Listing = () => {
 
   const fetchVideos = async () => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       if (!token) {
         throw new Error("No token found");
       }
-      const response = await axios.get('http://localhost:8080/api/video/all', {
-        headers: { Authorization: `Bearer ${token}` }
+      const response = await axios.get("http://localhost:8080/api/video/all", {
+        headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(response.data);
     } catch (error) {
@@ -53,21 +53,9 @@ const Listing = () => {
 
   return (
     <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 20,
-        padding: 20,
-      }}
+      style={{ display: "flex", flexDirection: "column", gap: 20, padding: 20 }}
     >
-      <h1
-        style={{
-          fontSize: 50,
-          fontWeight: "bold",
-        }}
-      >
-        Listing
-      </h1>
+      <h1 style={{ fontSize: 50, fontWeight: "bold" }}>Listing</h1>
       <Button
         type="primary"
         style={{
@@ -76,9 +64,7 @@ const Listing = () => {
           right: "50px",
           top: "50px",
         }}
-        onClick={() => {
-          navigate("/profile");
-        }}
+        onClick={() => navigate("/profile")}
       >
         Go to profile
       </Button>
@@ -102,12 +88,7 @@ const Listing = () => {
                 borderBottom: "1px solid black",
               }}
             >
-              <div
-                style={{
-                  fontSize: 30,
-                  fontWeight: "bold",
-                }}
-              >
+              <div style={{ fontSize: 30, fontWeight: "bold" }}>
                 {`${user.firstname} ${user.lastname}`}
               </div>
               <div
@@ -118,25 +99,13 @@ const Listing = () => {
                   border: "2px solid black",
                   padding: 5,
                 }}
-                onClick={() => {
-                  navigate(`${user.userId}`);
-                }}
+                onClick={() => navigate(`${user.userId}`)}
               >
                 <Avatar
-                  src={`data:image/jpeg;base64,${user.thumbnail}`}
-                  style={{
-                    width: 70,
-                    height: 70,
-                    border: "2px solid black",
-                  }}
+                  src={user.thumbnail}
+                  style={{ width: 70, height: 70, border: "2px solid black" }}
                 />
-                <div
-                  style={{
-                    marginLeft: 10,
-                    fontSize: 14,
-                    color: "#1890ff",
-                  }}
-                >
+                <div style={{ marginLeft: 10, fontSize: 14, color: "#1890ff" }}>
                   View all...
                 </div>
               </div>
@@ -160,40 +129,33 @@ const Listing = () => {
                     border: "1px solid black",
                   }}
                 >
-                  <ReactPlayer
-                    playIcon={<button>Play</button>}
-                    url={`data:video/mp4;base64,${video.videoData}`}
-                    width={400}
-                    style={{
-                      aspectRatio: "16:9",
-                      border: "1px solid black",
-                    }}
-                  />
+                  {video.thumbnail ? (
+                    <img
+                      src={video.thumbnail}
+                      alt={video.title}
+                      style={{
+                        width: "100%",
+                        aspectRatio: "16/9",
+                        objectFit: "cover",
+                      }}
+                    />
+                  ) : (
+                    <ReactPlayer
+                      playIcon={<button>Play</button>}
+                      url={video.videoUrl}
+                      width={400}
+                      style={{ aspectRatio: "16:9", border: "1px solid black" }}
+                    />
+                  )}
                   <div
-                    style={{
-                      padding: 10,
-                      fontSize: 20,
-                      fontWeight: "bold",
-                    }}
+                    style={{ padding: 10, fontSize: 20, fontWeight: "bold" }}
                   >
                     {video.title}
                   </div>
-                  <div
-                    style={{
-                      padding: 10,
-                      fontSize: 15,
-                      color: "gray",
-                    }}
-                  >
+                  <div style={{ padding: 10, fontSize: 15, color: "gray" }}>
                     {video.description}
                   </div>
-                  <div
-                    style={{
-                      padding: 10,
-                      fontSize: 12,
-                      color: "gray",
-                    }}
-                  >
+                  <div style={{ padding: 10, fontSize: 12, color: "gray" }}>
                     Created at: {new Date(video.createdAt).toLocaleString()}
                   </div>
                 </div>
