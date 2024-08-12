@@ -33,7 +33,7 @@ const Login: React.FC = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:8080/api/accounts/login',
+        'https://video-uploader-api.vercel.app/api/accounts/login',
         loginData,
         {
           headers: {
