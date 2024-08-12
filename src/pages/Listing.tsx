@@ -35,7 +35,7 @@ const Listing = () => {
       if (!token) {
         throw new Error("No token found");
       }
-      const response = await axios.get("http://localhost:8080/api/video/all", {
+      const response = await axios.get("https://video-uploader-api.vercel.app/api/video/all", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(response.data);
