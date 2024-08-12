@@ -33,7 +33,7 @@ const Profile = () => {
   const [lastName, setLastName] = useState("");
   const [bio, setBio] = useState("");
   const [isBioModalVisible, setIsBioModalVisible] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
   const [isVideoUploadModalVisible, setIsVideoUploadModalVisible] =
     useState(false);
