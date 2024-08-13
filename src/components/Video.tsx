@@ -30,7 +30,7 @@ const Video = ({ videoData }: Props) => {
           }}
         >
           <img
-            src={video?.thumbnail}
+            src={video?.thumbnailUrl}
             style={{
               width: 150,
               height: 150,

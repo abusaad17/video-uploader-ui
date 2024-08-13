@@ -60,7 +60,7 @@ const Profile = () => {
         throw new Error("No token found");
       }
       const response = await axios.get(
-        "https://video-uploader-api.vercel.app/api/accounts/userdata",
+        "https://video-uploader-api.onrender.com/api/accounts/userdata",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -86,7 +86,7 @@ const Profile = () => {
         throw new Error("No token or userId found");
       }
       const response = await axios.get(
-        `https://video-uploader-api.vercel.app/api/video/${userId}`,
+        `https://video-uploader-api.onrender.com/api/video/${userId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -117,7 +117,7 @@ const Profile = () => {
         formData.append("thumbnail", blob, "profile_thumbnail.jpg");
       }
       const response = await axios.post(
-        "https://video-uploader-api.vercel.app/api/accounts/biothumbnail",
+        "https://video-uploader-api.onrender.com/api/accounts/biothumbnail",
         formData,
         {
           headers: {
@@ -155,7 +155,7 @@ const Profile = () => {
         formData.append("thumbnail", blob, "video_thumbnail.jpg");
       }
       const response = await axios.post(
-        "https://video-uploader-api.vercel.app/api/video/upload",
+        "https://video-uploader-api.onrender.com/api/video/upload",
         formData,
         {
           headers: {

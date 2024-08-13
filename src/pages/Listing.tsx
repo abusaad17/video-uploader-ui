@@ -35,7 +35,7 @@ const Listing = () => {
       if (!token) {
         throw new Error("No token found");
       }
-      const response = await axios.get("https://video-uploader-api.vercel.app/api/video/all", {
+      const response = await axios.get("https://video-uploader-api.onrender.com/api/video/all", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(response.data);
@@ -129,24 +129,14 @@ const Listing = () => {
                     border: "1px solid black",
                   }}
                 >
-                  {video.thumbnail ? (
-                    <img
-                      src={video.thumbnail}
-                      alt={video.title}
-                      style={{
-                        width: "100%",
-                        aspectRatio: "16/9",
-                        objectFit: "cover",
-                      }}
-                    />
-                  ) : (
-                    <ReactPlayer
-                      playIcon={<button>Play</button>}
-                      url={video.videoUrl}
-                      width={400}
-                      style={{ aspectRatio: "16:9", border: "1px solid black" }}
-                    />
-                  )}
+                  <ReactPlayer
+                    url={video.videoUrl}
+                    width={400}
+                    height={225}
+                    controls
+                    light={video.thumbnail}
+                    playIcon={<button>Play</button>}
+                  />
                   <div
                     style={{ padding: 10, fontSize: 20, fontWeight: "bold" }}
                   >
