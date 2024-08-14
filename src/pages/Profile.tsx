@@ -228,7 +228,7 @@ const Profile = () => {
         >
           Go to Listing
         </Button>
-        <Title level={2}>Upload Data</Title>
+        <Title level={2}>Welcome to Video Uploader !!</Title>
 
         <Upload
           name="avatar"
