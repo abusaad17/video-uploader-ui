@@ -7,9 +7,11 @@ const Register: React.FC = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const onFinish = async (values: any) => {
     setLoading(true);
+    setError(null);
     try {
       const response = await axios.post('https://video-uploader-api.onrender.com/api/accounts/register', {
         firstname: values.firstname,
@@ -20,13 +22,17 @@ const Register: React.FC = () => {
 
       if (response.data.code === 200) {
         message.success(response.data.message);
-        navigate('/login'); // Redirect to login page after successful registration
+        navigate('/login');
       } else {
-        message.error('Registration failed. Please try again.');
+        setError('Registration failed. Please try again.');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Registration error:', error);
-      message.error('An error occurred during registration. Please try again.');
+      if (error.response && error.response.data && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError('An error occurred during registration. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
@@ -35,6 +41,7 @@ const Register: React.FC = () => {
   return (
     <div style={{ maxWidth: 400, margin: '0 auto', padding: 20 }}>
       <h2>Register</h2>
+      {error && <div style={{ color: 'red', marginBottom: 16 }}>{error}</div>}
       <Form form={form} onFinish={onFinish} layout="vertical">
         <Form.Item
           name="firstname"

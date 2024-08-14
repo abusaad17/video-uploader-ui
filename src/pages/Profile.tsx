@@ -100,7 +100,6 @@ const Profile = () => {
     }
   };
 
-
   const handleProfileSubmit = async () => {
     setProfileLoading(true);
     try {
@@ -237,6 +236,10 @@ const Profile = () => {
           className="avatar-uploader"
           showUploadList={false}
           beforeUpload={(file) => {
+            if (file.size > 1024 * 1024) {
+              message.error("Image must be smaller than 1MB!");
+              return Upload.LIST_IGNORE;
+            }
             getBase64(file, (url) => {
               setImageUrl(url);
             });
@@ -249,7 +252,10 @@ const Profile = () => {
             uploadButton
           )}
         </Upload>
-
+        <Text type="secondary" style={{ marginTop: 8 }}>
+          Note: The image must be under 1MB, otherwise an error will occur:
+          Failed to update profile.
+        </Text>
         <div style={{ marginTop: 16 }}>
           <Text strong>First Name:</Text> {firstName}
         </div>
@@ -299,6 +305,10 @@ const Profile = () => {
         >
           <PlusCircleOutlined /> Upload Video
         </div>
+        <Text type="secondary" style={{ marginTop: 8 }}>
+          Note: The video must be under 6MB, otherwise an error will occur:
+          Failed to upload video.
+        </Text>
         <Button
           type="default"
           style={{
@@ -353,6 +363,10 @@ const Profile = () => {
             <label htmlFor="thumbnail">Thumbnail</label>
             <Upload
               beforeUpload={(file) => {
+                if (file.size > 1024 * 1024) {
+                  message.error("Thumbnail must be smaller than 1MB!");
+                  return Upload.LIST_IGNORE;
+                }
                 getBase64(file, (url) => {
                   setThumbnail(url);
                 });
@@ -366,6 +380,10 @@ const Profile = () => {
           <Upload
             style={{ marginTop: 16 }}
             beforeUpload={(file) => {
+              if (file.size > 6 * 1024 * 1024) {
+                message.error("Video must be smaller than 6MB!");
+                return Upload.LIST_IGNORE;
+              }
               setVideo(file);
               return false;
             }}
@@ -396,7 +414,7 @@ const Profile = () => {
             rows={4}
             value={bio}
             onChange={(e) => setBio(e.target.value)}
-            maxLength={150}
+            maxLength={500}
             showCount
           />
         </Modal>
