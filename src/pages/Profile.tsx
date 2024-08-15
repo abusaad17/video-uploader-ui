@@ -257,9 +257,8 @@ const Profile = () => {
             uploadButton
           )}
         </Upload>
-        <Text type="secondary" style={{ marginTop: 8 }}>
-          Note: The image must be under 1MB, otherwise an error will occur:
-          Failed to update profile.
+        <Text type="secondary" style={{ marginTop: 8, color: 'red'  }}>
+          Note: The image must be under 1MB.
         </Text>
         <div style={{ marginTop: 16 }}>
           <Text strong>First Name:</Text> {firstName}
@@ -315,9 +314,8 @@ const Profile = () => {
         >
           <PlusCircleOutlined /> Upload Video
         </div>
-        <Text type="secondary" style={{ marginTop: 8 }}>
-          Note: The video must be under 6MB, otherwise an error will occur:
-          Failed to upload video.
+        <Text type="secondary" style={{ marginTop: 8, color: 'red'  }}>
+          Note: The video and thumbnail must be under 6MB
         </Text>
         <Button
           type="default"
