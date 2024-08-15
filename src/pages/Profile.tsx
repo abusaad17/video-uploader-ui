@@ -31,6 +31,8 @@ const getBase64 = (img: FileType, callback: (url: string) => void) => {
 const Profile = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [number, setNumber] = useState("");
   const [bio, setBio] = useState("");
   const [isBioModalVisible, setIsBioModalVisible] = useState(false);
   const [loading] = useState(false);
@@ -65,9 +67,12 @@ const Profile = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      const { firstname, lastname, bio, thumbnail } = response.data;
+      const { firstname, lastname, bio, thumbnail, email, number } =
+        response.data;
       setFirstName(firstname);
       setLastName(lastname);
+      setEmail(email);
+      setNumber(number);
       setBio(bio);
       setImageUrl(thumbnail);
     } catch (error) {
@@ -262,7 +267,12 @@ const Profile = () => {
         <div>
           <Text strong>Last Name:</Text> {lastName}
         </div>
-
+        <div>
+          <Text strong>Email:</Text> {email}
+        </div>
+        <div>
+          <Text strong>Contact number:</Text> {number}
+        </div>
         <div style={{ marginTop: 16, marginBottom: 16 }}>
           <Text strong>Bio:</Text>
           <div
